@@ -38,7 +38,7 @@ d1 = line_length([0; 1], [3, -1/2])/2
 d2 = line_length([-1; 0], [0, 1])/2
 
 % Step 10
-influence_coefficients(-1.90, -0.67, d2);
+influence_coefficients(R2_transf(1), R2_transf(2), d2);
 
 % TODO: fix the shit above so it actually works. In the meantime...
-coef = [0.0499; -0.0190];
+%coef = [0.0499; -0.0190];
