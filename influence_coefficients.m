@@ -6,5 +6,5 @@ function [phi] = influence_coefficients(x, z, d)
     nNz = xdN^2+z^2;
     c1 = z/nPz-z/nNz;
     c2 = xdN/nNz-xdP/nPz;
-    phi = [c1 c2]/(2*pi);
+    phi = [c1; c2]/(2*pi);
 end

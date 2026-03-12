@@ -38,7 +38,25 @@ d1 = line_length([0; 1], [3, -1/2])/2
 d2 = line_length([-1; 0], [0, 1])/2
 
 % Step 10
-influence_coefficients(R2_transf(1), R2_transf(2), d2);
+coeff2 = influence_coefficients(R2_transf(1), R2_transf(2), d2)
 
-% TODO: fix the shit above so it actually works. In the meantime...
-%coef = [0.0499; -0.0190];
+coeff2_gen = inv(R(theta2))*coeff2
+
+% Step 11
+A = zeros(2);
+A(1, 2) = dot(n1, coeff2_gen)
+
+% Step 12
+coeff1 = influence_coefficients(R1_transf(1), R1_transf(2), d1)
+
+coeff1_gen = inv(R(theta1))*coeff1
+
+% Step 13
+A(2, 1) = dot(n2, coeff1_gen)
+
+% Step 14
+v1 = inv(R(theta1))*[0; -1/(pi*d1)]
+v2 = inv(R(theta2))*[0; -1/(pi*d2)]
+
+A(1, 1) = dot(n1, v1)
+A(2, 2) = dot(n2, v2)
