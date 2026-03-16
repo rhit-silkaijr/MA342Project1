@@ -40,6 +40,8 @@ A(:, 1) = A(:, 1) - A(:, end);
 A(:, end - 1) = A(:, end - 1) - A(:, end);
 A(:, end) = [];
 
+disp(A*100);
+
 % remove wake effect
 n = n(1:7, :);
 
