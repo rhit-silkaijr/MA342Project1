@@ -9,15 +9,20 @@ function [A] = AMatrix(P, l, n, theta, mp)
 
     R_val = R(theta);
 
+    fprintf("R matrix:\n");
+    disp(R_val)
+
     d = l/2;
 
     for i = 1:length(P) + 1
         for j = 1:length(P)
             if i == j
-                A_temp(i, j) = dot(n(j, :), [0, -1/(pi*d(j))]);
+                A_temp(i, j) = dot(transpose(n(j, :)), [0, -1/(pi*d(j))]);
             else
                 dphi = influence_coefficients(P(i, 1), P(i, 2), d(j));
-                A_temp(i, j) = dot(n(j), R_val(j)\dphi);
+                fprintf("DPhi:\n");
+                disp(dphi)
+                A_temp(i, j) = dot(transpose(n(j, :)), R_val(j, :)\dphi);
             end
         end
     end
