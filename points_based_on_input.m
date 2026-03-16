@@ -19,19 +19,19 @@ xx = 0:.01:1;
 x2 = P2(:,1);
 y2 = P2(:,2);
 
-yy = spline(x,y,xx);
-yy2 = spline(x2,y2,xx);
+% yy = spline(x,y,xx);
+% yy2 = spline(x2,y2,xx);
 
-plot(x,y,'o',xx,yy);
+% plot(x,y,'o',xx,yy);
+% 
+% hold on
+% 
+% plot(x2,y2,'g',xx,yy2);
+% 
+% hold on
 
-hold on
-
-plot(x2,y2,'g',xx,yy2);
-
-hold on
-
-P_o = zeros(n,2);
-
+P_o = zeros(n-1,2);
+%P_o = zeros(n,2);
 if(mod(n,2) == 1)
     P_o(ceil(n/2),1) = 1;
     P_o(ceil(n/2),2) = 0;
@@ -53,4 +53,4 @@ else
         P_o(n-i+1,2) = spline(x2,y2,x_val);
     end
 end
-
+P_o = cat(1,[0 0],P_o);
