@@ -1,6 +1,6 @@
 % Compute the big A matrix
-function [R_transf] = do_cooler_shit(P, l, n, theta)
-    R_temp = zeros(length(P));
+function [A] = do_cooler_shit(P, l, n, theta, mp)
+    A_temp = zeros(length(P) - 1, length(P));
 
     R = @(theta) [
         cos(theta),     -sin(theta);
@@ -9,12 +9,17 @@ function [R_transf] = do_cooler_shit(P, l, n, theta)
 
     R_val = R(theta);
 
-    for i = 1:length(R_temp)
-        for j = 1:length(R_temp)
+    d = l/2;
+
+    for i = 1:length(P) + 1
+        for j = 1:length(P)
             if i == j
-                R_temp(i, j) = 1;
+                A_temp(i, j) = dot(n(j, :), [0, -1/(pi*d(j))]);
             else
-                R_temp(i, j) = R_val(i, :)
+                dphi = influence_coefficients(P(i, 1), P(i, 2), d(j));
+                disp(n(j));
+                disp(R_val(j)\dphi);
+                A_temp(i, j) = dot(n(j), R_val(j)\dphi);
             end
         end
     end

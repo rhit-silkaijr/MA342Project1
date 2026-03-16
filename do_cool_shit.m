@@ -1,7 +1,6 @@
 % Return the midpoints for every set of points
-% Should be length(mp) = length(P) - 1
 function [mp] = do_cool_shit(P)
-    mp_temp = zeros(length(P) - 1, 2);
+    mp_temp = zeros(length(P), 2);
 
     for i = 1:length(mp_temp)
         mp_temp(i, 1) = P(i + 1, 1) - P(i, 1);
