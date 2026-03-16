@@ -1,6 +1,6 @@
 % Compute the big A matrix
 function [A] = AMatrix(P, l, n, theta, mp)
-    A_temp = zeros(length(P) - 1, length(P));
+    A_temp = zeros(length(P) - 2, length(P) - 1);
 
     R = @(theta) [
         cos(theta),     -sin(theta);
@@ -9,21 +9,23 @@ function [A] = AMatrix(P, l, n, theta, mp)
 
     R_val = R(theta);
 
-    fprintf("R matrix:\n");
-    disp(R_val)
+    % fprintf("R matrix:\n");
+    % disp(R_val)
 
     d = l/2;
 
-    for i = 1:length(P) + 1
-        for j = 1:length(P)
+    for i = 1:(length(P) - 2)
+        for j = 1:(length(P) - 1)
             if i == j
                 A_temp(i, j) = dot(transpose(n(j, :)), [0, -1/(pi*d(j))]);
             else
                 dphi = influence_coefficients(P(i, 1), P(i, 2), d(j));
-                fprintf("DPhi:\n");
-                disp(dphi)
-                A_temp(i, j) = dot(transpose(n(j, :)), R_val(j, :)\dphi);
+                % fprintf("DPhi:\n");
+                % disp(dphi)
+                A_temp(i, j) = dot(transpose(n(j, :)), R_val(j)\dphi);
             end
         end
     end
+
+    A = A_temp;
 end

@@ -33,5 +33,35 @@ R_val = R(theta);
 
 line_lengths = line_lengths(P)
 
-AMatrix(P, line_lengths, n, theta, mp)
+A = AMatrix(P, line_lengths, n, theta, mp);
+
+% Do transformations
+A(:, 1) = A(:, 1) - A(:, end);
+A(:, end - 1) = A(:, end - 1) - A(:, end);
+A(:, end) = [];
+
+% remove wake effect
+n = n(1:7, :);
+
+% freestream velocities on each panel
+b = 76 * n * [1; 0];
+
+% doublet strengths
+mu = A\b;
+
+% wake strength
+gamma = -(mu(end) - mu(1));
+
+% assuming regular air density
+rho = 1.225;
+v_mag = 76;
+
+% Lift Force
+F_L = -gamma*v_mag*rho
+
+% Airplane model:
+% (m*g)/(F_L) = L_wing
+m = 70000;      % kg
+g = 9.81;       % m/s^2
+L_wing = (m*g)/F_L
 
