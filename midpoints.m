@@ -1,5 +1,5 @@
 % Return the midpoints for every set of points
-function [mp] = do_cool_shit(P)
+function [mp] = midpoints(P)
     mp_temp = zeros(length(P), 2);
 
     for i = 1:length(mp_temp)

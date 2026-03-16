@@ -11,6 +11,7 @@ P = [
     -3.20,  0.00;
     -3.00, -0.40;
      0.00, -0.50;
+     3.85, -1.44;
 ];
 
 % Step 3
@@ -20,7 +21,7 @@ n = normal_vectors(P);
 theta = orientation_angles(n);
 
 % Steps 5-8 R transformations
-mp = do_cool_shit(P);
+mp = midpoints(P);
 
 R = @(theta) [
     cos(theta),     -sin(theta);
