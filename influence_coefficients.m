@@ -1,4 +1,5 @@
 % Returns i and j influence coefficients for a specified panel
+% x and z are the transformed midpoint of the specified panel
 function [phi] = influence_coefficients(x, z, d)
     xdP = x+d;
     xdN = x-d;

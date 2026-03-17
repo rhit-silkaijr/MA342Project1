@@ -33,7 +33,7 @@ R_val = R(theta);
 
 line_lengths = line_lengths(P)
 
-A = AMatrix(P, line_lengths, n, theta, mp);
+A = AMatrix(P, line_lengths, n, theta, true);
 
 % Do transformations
 A(:, 1) = A(:, 1) - A(:, end);

@@ -10,6 +10,7 @@ function [n] = normal_vectors(P)
 
     for i = 1:length(n_temp)
         line = line_length(P(i, :), P(i + 1, :));
+        % disp(cross([0; -1; 0], line));
         stuff = (cross([0; -1; 0], line))/norm(cross([0; -1; 0], line));
         n_temp(i, :) = [stuff(1); stuff(3)];
     end
