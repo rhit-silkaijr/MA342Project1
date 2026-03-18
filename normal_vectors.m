@@ -15,5 +15,5 @@ function [n] = normal_vectors(P)
         n_temp(i, :) = [stuff(1); stuff(3)];
     end
 
-    n = n_temp
+    n = n_temp;
 end

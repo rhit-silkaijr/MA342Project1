@@ -20,4 +20,4 @@ v = 76;         % m/s
 
 [L, A] = airfoil_wing(P, m, v, true);
 
-fprintf("Airfoil Length is: %10.3f m\n", L);
+fprintf("Airfoil Length is:")
