@@ -14,9 +14,8 @@
 % plt: logical boolean, whether to show plots
 %
 % Returns
-%   L_ret: the length of the calculated airfoil wing in meters
-%   A_ret: the A matrix, the design coefficients of the wing
-function [L_ret, A_ret] = airfoil_wing(P, m, v, plt)
+%   gamma: The Lift coefficient C_L, that lifts the aircraft
+function [gamma] = airfoil_wing(P, v, plt)
     % we have to make a displacement for the wake effect origin point
     % currently using a 1% adjustment of the total height of the
     % wing profile
@@ -170,18 +169,7 @@ function [L_ret, A_ret] = airfoil_wing(P, m, v, plt)
     
     % wake strength calculation by taking the first and last points
     % of the doublet strengths
-    gamma = -(mu(end) - mu(1));
-    
-    % assuming regular air density, kg/m^3
-    rho = 1.225;
-    
-    % Lift Force
-    F_L = -gamma*v*rho;
-    
-    % Airplane model:
-    g = 9.81;       % m/s^2
-    L_ret = (m*g)/F_L;
-    A_ret = A;
+    gamma = (mu(end) - mu(1));
 
     % Plot our current 2D foil, if specified
     if plt
