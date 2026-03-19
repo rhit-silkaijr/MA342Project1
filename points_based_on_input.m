@@ -33,10 +33,10 @@ y2 = P2(:,2);
 P_o = zeros(n-1,2);
 %P_o = zeros(n,2);
 if(mod(n,2) == 1)
-    P_o(ceil(n/2),1) = 1;
+    P_o(ceil(n/2),1) = 0;
     P_o(ceil(n/2),2) = 0;
     for i=1:(n-1)/2
-        x_val=2*i/(n+1);
+        x_val=1 - 2*i/(n+1);
         P_o(i,1) = x_val;
         P_o(i,2) = spline(x,y,x_val);
     
@@ -45,7 +45,7 @@ if(mod(n,2) == 1)
     end
 else
     for i=1:n/2
-        x_val=(i-.5)/(n/2);
+        x_val=1 - (i-.5)/(n/2);
         P_o(i,1) = x_val;
         P_o(i,2) = spline(x,y,x_val);
     
@@ -53,4 +53,4 @@ else
         P_o(n-i+1,2) = spline(x2,y2,x_val);
     end
 end
-P_o = cat(1,[0 0],P_o);
+P_o = cat(1,[1 0],P_o);
