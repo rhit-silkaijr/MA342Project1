@@ -11,21 +11,17 @@ fx84w097 = importdata('fx84w097.dat.txt');
 mh112 = importdata('mh112.dat.txt');
 
 data = {};
-data{1} = naca2418;
-data{2} = naca64209;
-data{3} = fx84w097;
-data{4} = mh112;
+data{1} = 
 
 num_panels = transpose(5:2:35);
 
 figure;
-hold on;
 
-for d = 1:length(data)
+for d = 1:length(data_exp)
     C_L1 = zeros(length(num_panels), 1);
 
     for i = 1:length(C_L1)
-        X = points_based_on_input(data{d},num_panels(i));
+        X = points_based_on_input(data_exp(d),num_panels(i));
         X = [X; X(1, :)];
         X = [X; [1.1, -0.05]];
         C_L1(i) = airfoil_wing(X, v, false);
@@ -35,9 +31,7 @@ for d = 1:length(data)
 end
 
 grid on;
-hold off;
-title("Experiment 1: Altering the number of panels");
-legend('naca2418', 'naca64209', 'fx84w097', 'mh112');
+title("Experiment 1: Altering the number of panels")
 xlabel("Number of Panels");
 ylabel("Lift Coefficient (C_L)");
 
@@ -48,12 +42,11 @@ theta_iter = linspace(0, theta_max, 25);
 num_panels_2 = 13;
 
 figure;
-hold on;
 
-for d = 1:length(data)
+for d = 1:length(data_exp)
     C_L2 = zeros(length(theta_iter), 1);
     for i = 1:length(C_L2)
-        X = points_based_on_input(data{d}, num_panels_2);
+        X = points_based_on_input(naca2418, num_panels_2);
         X = [X; X(1, :)];
         X = [X; [1 + wa_length*cos(theta_iter(i)), -wa_length*sin(theta_iter(i))]];
         C_L2(i) = airfoil_wing(X, v, false);
@@ -63,8 +56,6 @@ for d = 1:length(data)
 end
 
 grid on;
-hold off;
-title("Experiment 2: Altering the wake angle");
-legend('naca2418', 'naca64209', 'fx84w097', 'mh112');
+title("Experiment 2: Altering the wake angle")
 xlabel("Wake Angle Theta (rad)");
 ylabel("Lift Coefficient (C_L)");
